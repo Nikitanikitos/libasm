@@ -6,13 +6,13 @@ ft_strcpy:
     xor rcx, rcx
 
 loop:
-    cmp BYTE [rdi + rcx], 0
+    cmp BYTE [rsi + rcx], 0
     je  return
-    mov rdx, [rdi + rcx]
-    mov [rsi + rcx], rdx
+    mov dl, BYTE [rsi + rcx]
+    mov BYTE [rdi + rcx], dl
     inc rcx
     jmp loop
 
 return:
-    mov rax, rsi
+    mov rax, rdi
     ret
