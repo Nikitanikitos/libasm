@@ -13,6 +13,8 @@
 #include "libasm.h"
 #include "stdio.h"
 #include "string.h"
+#include <fcntl.h>
+#include <unistd.h>
 
 void	test_strcpy_case(char *test_case)
 {
@@ -49,7 +51,7 @@ void 	test_case_strlen(char *test_case)
 void	test_strlen(void)
 {
 	printf("========== ft_strlen ==========\n");
-	printf("%-10s | %10s", "ft_strlen", "ft_strlen\n");
+	printf("%-10s | %10s", "ft_strlen", "strlen\n");
 	test_case_strlen("");
 	test_case_strlen("Hello, world!");
 	test_case_strlen("\n");
@@ -71,18 +73,82 @@ void	test_case_strcmp(char *array1, char *array2)
 void	test_strcmp(void)
 {
 	printf("========== ft_strcmp ==========\n");
-	printf("%-10s | %10s", "ft_strcmp", "ft_strcmp\n");
+	printf("%-10s | %10s", "ft_strcmp", "strcmp\n");
 	test_case_strcmp("", "");
 	test_case_strcmp("Hello, World!", "Hello, World!");
-	test_case_strcmp("Hello, World!", "Hella, World");
+	test_case_strcmp("Hella, World!", "Hello, World");
 	test_case_strcmp("Hello, World!", "");
 	test_case_strcmp("", "Hello, World!");
+	printf("\n\n");
+}
+
+void	test_case_write(int fd, int ft_fd, int buffer_size, char *src)
+{
+	int 	ft_result;
+	int 	result;
+
+	ft_result = ft_write(ft_fd, src, buffer_size);
+	ft_write(ft_fd, "\n", 1);
+	result = write(fd, src, buffer_size);
+	ft_write(fd, "\n", 1);
+	printf("Test case: %s\n", src);
+	printf("%-10d | %10d\n", ft_result, result);
+}
+
+void	test_write(void)
+{
+	const int	fd = open("test.txt", O_RDWR);
+	const int	ft_fd = open("ft_test.txt", O_RDWR);
+
+	printf("========== ft_write ==========\n");
+	printf("%-10s | %10s", "ft_write", "write\n");
+	test_case_write(fd, ft_fd, 5, "Hello, world!");
+	test_case_write(fd, ft_fd, 10, "Hello, world!");
+	test_case_write(fd, ft_fd, 1, "");
+	test_case_write(fd, ft_fd, 4, "123\n");
+	test_case_write(1, 1, 19, "output to terminal\n");
+	printf("\n\n");
+	close(fd);
+	close(ft_fd);
+}
+
+void	test_case_read(int fd, int ft_fd, int buffer_size)
+{
+	int 	ft_result;
+	int 	result;
+	char	buffer[100];
+	char	ft_buffer[100];
+
+	ft_result = ft_read(ft_fd, ft_buffer, buffer_size);
+	result = read(fd, buffer, buffer_size);
+	ft_buffer[buffer_size] = 0;
+	buffer[buffer_size] = 0;
+	printf("Buffer size = %d\n", buffer_size);
+	printf("%-10d | %10d\n", ft_result, result);
+	printf("%-10s | %10s\n", ft_buffer, buffer);
+}
+
+void	test_read(void)
+{
+	const int	fd = open("test.txt", O_RDWR);
+	const int	ft_fd = open("ft_test.txt", O_RDWR);
+
+	printf("========== ft_read ==========\n");
+	printf("%-10s | %10s", "ft_read", "read\n");
+	test_case_read(fd, ft_fd, 5);
+	test_case_read(fd, ft_fd, 0);
+	test_case_read(fd, ft_fd, 10);
+	printf("\n\n");
+	close(fd);
+	close(ft_fd);
 }
 
 int		main(void)
 {
-	test_strcpy();
-	test_strlen();
+//	test_strcpy();
+//	test_strlen();
 //	test_strcmp();
+	test_write();
+	test_read();
 	return (0);
 }

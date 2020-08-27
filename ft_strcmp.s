@@ -6,18 +6,22 @@ ft_strcmp:
     xor rcx, rcx
 
 loop:
-	mov al, [rdi + rcx]
-    cmp BYTE al, [rsi + rcx]
+    mov al, byte [rdi + rcx]
+    mov bl, byte [rsi + rcx]
+    cmp al, 0
+	je return
+	cmp bl, 0
+	je return
+    cmp al, bl
     jne return
     inc rcx
     jmp loop
 
 return:
-    mov bl, [rsi + rcx]
-    sub al, bl
-    jz  equal
-    js  smaller
-    jmp more
+    cmp al, bl
+    je  equal
+    jl  smaller
+    jg more
 
 equal:
     mov rax, 0
