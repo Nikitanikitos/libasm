@@ -11,11 +11,20 @@
 /* ************************************************************************** */
 
 
-int		ft_write(int fd, char *buff, int buffer_size);
-int		ft_read(int fd, void *buff, int buffer_size);
+typedef struct		s_list
+{
+    void			*data;
+    struct s_list	*next;
+}					t_list;
 
-int		ft_strlen(const char *s);
-int		ft_strcmp(const char *s1, const char *s2);
+int					ft_write(int fd, char *buff, int buffer_size);
+int					ft_read(int fd, void *buff, int buffer_size);
 
-char 	*ft_strcpy(char *dest, const char *src);
-char 	*ft_strdup(char *src);
+int					ft_strlen(const char *s);
+int					ft_strcmp(const char *s1, const char *s2);
+
+char 				*ft_strcpy(char *dest, const char *src);
+char 				*ft_strdup(char *src);
+
+int					ft_lstsize(t_list *lst);
+void				ft_lstadd_front(t_list **lst, t_list *new);
