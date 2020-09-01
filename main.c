@@ -13,6 +13,8 @@
 #include "libasm.h"
 #include "stdio.h"
 #include "string.h"
+#include <stdlib.h>
+
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -20,7 +22,6 @@ void	test_strcpy_case(char *test_case)
 {
 	char	ft_buffer[25];
 	char 	buffer[25];
-
 
 	ft_strcpy(ft_buffer, test_case);
 	strcpy(buffer, test_case);
@@ -116,8 +117,8 @@ void	test_case_read(int fd, int ft_fd, int buffer_size)
 {
 	int 	ft_result;
 	int 	result;
-	char	buffer[100];
-	char	ft_buffer[100];
+	char	buffer[50];
+	char	ft_buffer[50];
 
 	ft_result = ft_read(ft_fd, ft_buffer, buffer_size);
 	result = read(fd, buffer, buffer_size);
@@ -143,12 +144,37 @@ void	test_read(void)
 	close(ft_fd);
 }
 
+//void	test_case_strdup(char *test_case)
+//{
+//	char	*ft_result;
+//	char	*result;
+//
+//	ft_result = ft_strdup(test_case);
+//	result = strdup(test_case);
+//	printf("%-15s | %15s\n", ft_result, result);
+//	free(result);
+//	free(ft_result);
+//}
+
+//void	test_strdup(void)
+//{
+//	printf("========== ft_strdup ==========\n");
+//	printf("%-15s | %15s", "ft_strdup", "strdup\n");
+//	test_case_strdup("");
+//	test_case_strdup("Hello, world!");
+//	test_case_strdup("Hello,\0 world!");
+//	test_case_strdup("213321");
+//}
+
 int		main(void)
 {
+	int q = ft_write(-1, "c", 1);
+	printf("%d", q);
 //	test_strcpy();
 //	test_strlen();
 //	test_strcmp();
-	test_write();
-	test_read();
+//	test_write();
+//	test_read();
+//	test_strdup();
 	return (0);
 }
