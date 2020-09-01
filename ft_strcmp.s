@@ -1,8 +1,8 @@
-global  ft_strcmp
+global  _ft_strcmp
 
 section .text
 
-ft_strcmp:
+_ft_strcmp:
     xor rcx, rcx
 
 loop:

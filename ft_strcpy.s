@@ -1,8 +1,8 @@
-global  ft_strcpy
+global  _ft_strcpy
 
 section .text
 
-ft_strcpy:
+_ft_strcpy:
     xor rcx, rcx
 
 loop:

@@ -1,38 +1,31 @@
-global      ft_strdup
-extern      malloc
-extern      ft_strlen
-extern      ft_strcpy
+section.text:
+	global _ft_strdup
+	extern _malloc
+	extern _ft_strlen
+	extern _ft_strcpy
 
-section     .text
+_ft_strdup:
+	cmp rdi, 0x0
+	jz _error
 
-section     .text
+.strlen_call:
+	call _ft_strlen
+	inc rax
 
-ft_strdup:
-    cmp     rdi, 0
-    je      error
-    call    ft_strlen
-    inc     rax
-    ret
+.malloc_call:
+	push rdi
+	mov rdi, rax
+	call _malloc
+	cmp rax, 0x0
+	jz _error
 
-.malloc:
-    push    rdi
-    mov     rdi, rax
-    call    malloc
-    pop     rdi
-    cmp     rax, 0
-    je      error
-    xor     rcx, rcx
+.strcpy_copy:
+	pop rdi
+	mov rsi, rdi
+	mov rdi, rax
+	call _ft_strcpy
+	ret
 
-.copy:
-    mov     BYTE dl, [rdi + rcx]
-    mov     BYTE [rax + rcx], dl
-    cmp     dl, 0
-    je      return
-    inc     rcx
-
-return:
-    ret
-
-error:
-    xor     rax, rax
-    ret
+_error:
+	mov rax, 0x0
+	ret
