@@ -27,10 +27,13 @@ $(NAME):    $(OBJS)
 	ar rcs $(NAME) ${OBJS}
 
 bonus:      $(OBJS_BONUS)
-            ar -rc $(NAME) $(OBJS_BONUS)
+	ar -rc $(NAME) $(OBJS_BONUS)
 
 test:       $(NAME)
 	gcc -Wall -Wextra -Werror -L. -lasm main.c -o test
+
+test_bonus:
+	gcc -Wall -Wextra -Werror -L. -lasm main_bonus.c -o test
 
 %.o:        %.s
 	nasm -f macho64 $<

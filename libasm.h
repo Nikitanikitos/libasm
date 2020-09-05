@@ -27,4 +27,4 @@ char 				*ft_strcpy(char *dest, const char *src);
 char 				*ft_strdup(char *src);
 
 int					ft_lstsize(t_list *lst);
-void				ft_lstadd_front(t_list **lst, t_list *new);
+void				ft_list_push_front(t_list **lst, t_list *new);
