@@ -26,5 +26,6 @@ int					ft_strcmp(const char *s1, const char *s2);
 char 				*ft_strcpy(char *dest, const char *src);
 char 				*ft_strdup(char *src);
 
-int					ft_lstsize(t_list *lst);
+int					ft_list_size(t_list *lst);
 void				ft_list_push_front(t_list **lst, t_list *new);
+void				ft_list_push_back(t_list **lst, t_list *new);
