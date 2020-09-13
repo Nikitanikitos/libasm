@@ -135,7 +135,7 @@ void	test_write(void)
 	test_case_write(fd, ft_fd, 1, "");
 	test_case_write(fd, ft_fd, 4, "123\n");
 	test_case_write(1, 1, 19, "output to terminal\n");
-	test_case_write(-1, -1, 19, "output to terminal\n");
+	test_case_write(-1, -1, 21, "21 to terminal\n");
 	printf("\n\n");
 	close(fd);
 	close(ft_fd);
@@ -170,11 +170,11 @@ void	test_strdup(void)
 
 int		main(void)
 {
-	test_strcpy();
-	test_strlen();
-	test_strcmp();
+	// test_strcpy();
+	// test_strlen();
+	// test_strcmp();
 	test_write();
-	test_read();
-	test_strdup();
+	// test_read();
+	// test_strdup();
 	return (0);
 }

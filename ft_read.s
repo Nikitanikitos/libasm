@@ -9,7 +9,10 @@ _ft_read:
 	ret
 
 error_exit:
-    mov     rbx, rax
+    push    rdx
+    mov     rdx, rax
     call    ___error
-    mov     [rax], rbx
+    mov     [rax], rdx
+    pop     rdx
+    mov     rax, -1
     ret
