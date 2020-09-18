@@ -18,19 +18,5 @@ loop:
     jmp loop
 
 return:
-    cmp al, bl
-    je  equal
-    jl  smaller
-    jg more
-
-equal:
-    mov rax, 0
-    ret
-
-more:
-    mov rax, 1
-    ret
-
-smaller:
-    mov rax, -1
+    sub al, bl
     ret

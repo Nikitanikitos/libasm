@@ -19,8 +19,8 @@
 
 void	test_strcpy_case(char *test_case)
 {
-	char	ft_buffer[25];
-	char 	buffer[25];
+	char	ft_buffer[200];
+	char 	buffer[200];
 
 	ft_strcpy(ft_buffer, test_case);
 	strcpy(buffer, test_case);
@@ -96,7 +96,8 @@ void	test_strcpy(void)
 	printf("%-15s | %15s", "ft_strcpy", "strcpy\n");
 	test_strcpy_case("");
 	test_strcpy_case("Hello, World!");
-	test_strcpy_case(" 123\0321");
+	test_strcpy_case("Very long string Very long string Very long string Very long string ");
+	test_strcpy_case(" 1231");
 	printf("\n\n");
 }
 
@@ -106,8 +107,9 @@ void	test_strlen(void)
 	printf("%-10s | %10s", "ft_strlen", "strlen\n");
 	test_case_strlen("");
 	test_case_strlen("Hello, world!");
+	test_case_strlen("Very long string Very long string Very long string Very long string ");
 	test_case_strlen("\n");
-	test_case_strlen("123\0123");
+	test_case_strlen("12323");
 	printf("\n\n");
 }
 
@@ -117,7 +119,8 @@ void	test_strcmp(void)
 	printf("%-10s | %10s", "ft_strcmp", "strcmp\n");
 	test_case_strcmp("", "");
 	test_case_strcmp("Hello, World!", "Hello, World!");
-	test_case_strcmp("Hella, World!", "Hello, World");
+	test_case_strcmp("0123456", "0123456789");
+	test_case_strcmp("0123456789", "0123456");
 	test_case_strcmp("Hello, World!", "");
 	test_case_strcmp("", "Hello, World!");
 	printf("\n\n");
@@ -172,8 +175,8 @@ int		main(void)
 {
 	// test_strcpy();
 	// test_strlen();
-	// test_strcmp();
-	test_write();
+	test_strcmp();
+	// test_write();
 	// test_read();
 	// test_strdup();
 	return (0);
