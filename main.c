@@ -55,9 +55,7 @@ void	test_case_write(int fd, int ft_fd, int buffer_size, char *src)
     int 	result;
 
     ft_result = ft_write(ft_fd, src, buffer_size);
-    ft_write(ft_fd, "\n", 1);
     result = write(fd, src, buffer_size);
-    ft_write(fd, "\n", 1);
     printf("Test case: %s\n", src);
     printf("%-10d | %10d\n", ft_result, result);
 }
@@ -133,12 +131,14 @@ void	test_write(void)
 
 	printf("========== ft_write ==========\n");
 	printf("%-10s | %10s", "ft_write", "write\n");
-	test_case_write(fd, ft_fd, 5, "Hello, world!");
-	test_case_write(fd, ft_fd, 10, "Hello, world!");
-	test_case_write(fd, ft_fd, 1, "");
-	test_case_write(fd, ft_fd, 4, "123\n");
 	test_case_write(1, 1, 19, "output to terminal\n");
 	test_case_write(-1, -1, 21, "21 to terminal\n");
+	test_case_write(fd, ft_fd, 5, "Hello, world!");
+	test_case_write(fd, ft_fd, 10, "Hello, world!");
+	test_case_write(fd, ft_fd, 100, "Buffer greater than string length Very long string Very long string Very long string");
+	test_case_write(fd, ft_fd, 100, "Buffer greater than string length Very long string Very long string Very long string");
+	test_case_write(fd, ft_fd, 1, "");
+	test_case_write(fd, ft_fd, 4, "123");
 	printf("\n\n");
 	close(fd);
 	close(ft_fd);
@@ -154,6 +154,7 @@ void	test_read(void)
 	test_case_read(fd, ft_fd, 5);
 	test_case_read(fd, ft_fd, 0);
 	test_case_read(fd, ft_fd, 10);
+	test_case_read(fd, ft_fd, 55);
 	test_case_read(-1, -1, 7);
 	printf("\n\n");
 	close(fd);
@@ -168,16 +169,17 @@ void	test_strdup(void)
 	test_case_strdup("Hello, world!");
 	test_case_strdup("Hello,\0 world!");
 	test_case_strdup("213321");
+	test_case_strdup("Very long string Very long string Very long string Very long string Very long string ");
     printf("\n\n");
 }
 
 int		main(void)
 {
-	// test_strcpy();
-	// test_strlen();
+	test_strcpy();
+	test_strlen();
 	test_strcmp();
-	// test_write();
-	// test_read();
-	// test_strdup();
+	test_write();
+	test_read();
+	test_strdup();
 	return (0);
 }

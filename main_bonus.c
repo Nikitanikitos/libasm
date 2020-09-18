@@ -47,6 +47,7 @@ void	test_case_list_size(t_list *list)
 	int		size;
 
 	size = ft_list_size(list);
+	ft_print_list(list);
 	printf("List size = %d\n", size);
 }
 
@@ -54,12 +55,15 @@ void	test_list_size()
 {
 	t_list	*list;
 
-	list = ft_lstnew("First Element");
-	ft_list_push_back(&list, ft_lstnew("Third Element"));
-	ft_list_push_back(&list, ft_lstnew("Fourth Element"));
-	ft_list_push_back(&list, ft_lstnew("Fourth Element"));
-	ft_list_push_back(&list, ft_lstnew("Fourth Element"));
+	list = NULL;
 	printf("========== ft_lstsize ==========\n");
+	test_case_list_size(list);
+	list = ft_lstnew("First Element");
+	ft_list_push_back(&list, ft_lstnew("Second Element"));
+	ft_list_push_back(&list, ft_lstnew("Third Element"));
+	test_case_list_size(list);
+	ft_list_push_back(&list, ft_lstnew("Fourth Element"));
+	ft_list_push_back(&list, ft_lstnew("Fifth Element"));
 	test_case_list_size(list);
 	printf("\n\n");
 }
@@ -82,6 +86,7 @@ void	test_push_front()
 	printf("========== ft_list_push_front ==========\n");
 	test_case_push_front(&list, ft_lstnew("Push front"));
 	test_case_push_front(&list, ft_lstnew("Push front again"));
+	test_case_push_front(&list, ft_lstnew("First element"));
 	printf("\n\n");
 }
 
@@ -103,12 +108,13 @@ void	test_push_back()
 	printf("========== ft_list_push_back ==========\n");
 	test_case_push_back(&list, ft_lstnew("Push back"));
 	test_case_push_back(&list, ft_lstnew("Push back again"));
+	test_case_push_back(&list, ft_lstnew("Last element"));
 	printf("\n\n");
 }
 
 int 	main(void)
 {
+	test_push_front();
+	test_push_back();
 	test_list_size();
-	// test_push_front();
-	// test_push_back();
 }

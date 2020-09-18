@@ -3,7 +3,8 @@ section .text
 global  _ft_list_size
 
 _ft_list_size:
-    xor rax, rax
+    xor     rax, rax
+    push   rdi
 
 list_size:
     cmp rdi, 0
@@ -13,8 +14,10 @@ list_size:
     jmp list_size
 
 exit:
+    pop     rdi
 	ret
 
 error:
-    xor rax, rax
+    pop     rdi
+    xor     rax, rax
     ret
