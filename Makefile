@@ -11,29 +11,23 @@
 # **************************************************************************** #
 
 NAME        = libasm.a
+TEST		= test
 
-SRCS        = $(shell find . -type f -name 'ft_*.s')
+SRCS        = $(shell find . -type f -name 'ft_*.s' -not -name 'ft_*bonus.s')
 SRCS_BONUS  = $(shell find . -type f -name 'ft_*_bonus.s')
 
 OBJS        = $(SRCS:.s=.o)
-OBJS_BONUS  = $(SRCS:.s=.o)
+OBJS_BONUS  = $(SRCS_BONUS:.s=.o)
 
 .PHONY: all clean bonus fclean test
-
 
 all:        $(NAME)
 
 $(NAME):    $(OBJS)
 	ar rcs $(NAME) ${OBJS}
 
-bonus:      $(OBJS_BONUS)
+bonus:      $(NAME) $(OBJS_BONUS)
 	ar -rc $(NAME) $(OBJS_BONUS)
-
-test:       $(NAME)
-	gcc -Wall -Wextra -Werror -L. -lasm main.c -o test
-
-test_bonus:
-	gcc -Wall -Wextra -Werror -L. -lasm main_bonus.c -o test
 
 %.o:        %.s
 	nasm -f macho64 $<
